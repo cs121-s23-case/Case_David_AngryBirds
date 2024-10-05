@@ -1,0 +1,129 @@
+[gd_scene load_steps=15 format=3 uid="uid://h5mehrs5ndl3"]
+
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="1_5ovto"]
+[ext_resource type="Script" path="res://scenes/level_3.gd" id="1_uvhmu"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="2_3bwfj"]
+[ext_resource type="Script" path="res://static_body_2d.gd" id="3_va0u7"]
+[ext_resource type="Script" path="res://sus.gd" id="4_6jd5e"]
+[ext_resource type="Texture2D" uid="uid://civb8y0opchff" path="res://sprites/fishTile_078.png" id="5_ugd1o"]
+[ext_resource type="Script" path="res://sus_2.gd" id="6_p8ull"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="7_13kxg"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="8_bcibu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dsaco"]
+radius = 46.0977
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1eoch"]
+size = Vector2(997, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a44ya"]
+size = Vector2(155, 795)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he4py"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dd3nh"]
+radius = 55.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_uvhmu")
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(272, 216)
+script = ExtResource("1_5ovto")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+position = Vector2(-168, 226)
+shape = SubResource("CircleShape2D_dsaco")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+position = Vector2(-169, 226)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3bwfj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+script = ExtResource("3_va0u7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(663.5, 10.5)
+shape = SubResource("RectangleShape2D_1eoch")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1201, -339)
+shape = SubResource("RectangleShape2D_a44ya")
+
+[node name="Sus" type="RigidBody2D" parent="."]
+position = Vector2(762, 231)
+mass = 0.005
+gravity_scale = 2.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("4_6jd5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus"]
+position = Vector2(-507, 202)
+shape = SubResource("CircleShape2D_he4py")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus"]
+position = Vector2(-513, 198)
+texture = ExtResource("5_ugd1o")
+
+[node name="Sus2" type="RigidBody2D" parent="."]
+position = Vector2(795, 258)
+mass = 0.005
+gravity_scale = 2.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("6_p8ull")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus2"]
+position = Vector2(217, 88)
+shape = SubResource("CircleShape2D_dd3nh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus2"]
+position = Vector2(217, 91)
+texture = ExtResource("5_ugd1o")
+
+[node name="Wall" parent="." instance=ExtResource("7_13kxg")]
+position = Vector2(-200, 25)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall2" parent="." instance=ExtResource("7_13kxg")]
+position = Vector2(332, 18)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall3" parent="." instance=ExtResource("7_13kxg")]
+position = Vector2(453, 20)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall4" parent="." instance=ExtResource("7_13kxg")]
+position = Vector2(-19, 28)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall5" parent="." instance=ExtResource("7_13kxg")]
+position = Vector2(-454, 157)
+mass = 1000.0
+gravity_scale = 0.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_bcibu")
+
+[node name="score" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[connection signal="child_entered_tree" from="StaticBody2D" to="StaticBody2D" method="_on_child_entered_tree"]
+[connection signal="body_shape_entered" from="Sus" to="Sus" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus2" to="Sus2" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus2" to="Sus2" method="_on_body_shape_entered"]

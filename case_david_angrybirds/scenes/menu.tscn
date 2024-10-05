@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dewyn5as4inkm"]
+
+[ext_resource type="Script" path="res://scenes/level_1.gd" id="1_r558w"]
+[ext_resource type="Script" path="res://scenes/level_2.gd" id="2_wwfyl"]
+
+[node name="menu" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1162.0
+offset_bottom = 639.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 47.0
+offset_right = 616.0
+offset_bottom = 89.0
+scale = Vector2(2, 2)
+text = "That bird game"
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 106.0
+offset_right = 563.0
+offset_bottom = 135.0
+scale = Vector2(2.305, 2.305)
+text = "Choose A Level!"
+
+[node name="Level1" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 185.0
+offset_right = 639.0
+offset_bottom = 252.0
+text = "Level 1"
+script = ExtResource("1_r558w")
+
+[node name="Level2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 279.0
+offset_right = 638.0
+offset_bottom = 346.0
+text = "Level 2"
+script = ExtResource("2_wwfyl")
+
+[node name="Level3" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 379.0
+offset_right = 639.0
+offset_bottom = 445.0
+text = "Level 3"

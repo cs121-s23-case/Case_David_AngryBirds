@@ -1,0 +1,142 @@
+[gd_scene load_steps=17 format=3 uid="uid://bs7jepmrc3ue5"]
+
+[ext_resource type="Script" path="res://level_2.gd" id="1_iycur"]
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="2_p3r2u"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="3_rdx8v"]
+[ext_resource type="Script" path="res://scenes/static_body_2d.gd" id="4_1h3gb"]
+[ext_resource type="Script" path="res://scenes/sus.gd" id="5_mtbse"]
+[ext_resource type="Texture2D" uid="uid://civb8y0opchff" path="res://sprites/fishTile_078.png" id="6_ntjhr"]
+[ext_resource type="Script" path="res://scenes/sus_2.gd" id="7_ab3p2"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="7_hdate"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="8_pp43f"]
+[ext_resource type="AudioStream" uid="uid://um0wd42eh0oo" path="res://crash.wav" id="10_5ulk5"]
+[ext_resource type="AudioStream" uid="uid://b4rui4s5nf22n" path="res://Ludum Dare 38 - Track 2.wav" id="11_4v2at"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feup2"]
+radius = 46.0977
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj7kv"]
+size = Vector2(997, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko76b"]
+size = Vector2(155, 795)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dpcns"]
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7j4q"]
+radius = 55.0
+
+[node name="level_2" type="Node2D"]
+script = ExtResource("1_iycur")
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(272, 216)
+script = ExtResource("2_p3r2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+position = Vector2(-168, 226)
+shape = SubResource("CircleShape2D_feup2")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+position = Vector2(-169, 226)
+scale = Vector2(2, 2)
+texture = ExtResource("3_rdx8v")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+script = ExtResource("4_1h3gb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(663.5, 10.5)
+shape = SubResource("RectangleShape2D_vj7kv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1201, -339)
+shape = SubResource("RectangleShape2D_ko76b")
+
+[node name="Sus" type="RigidBody2D" parent="."]
+position = Vector2(762, 231)
+mass = 0.005
+gravity_scale = 2.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("5_mtbse")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus"]
+position = Vector2(-63, 367)
+shape = SubResource("CircleShape2D_dpcns")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus"]
+position = Vector2(-64, 368)
+texture = ExtResource("6_ntjhr")
+
+[node name="Sus2" type="RigidBody2D" parent="."]
+position = Vector2(795, 258)
+mass = 0.005
+gravity_scale = 2.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("7_ab3p2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus2"]
+position = Vector2(217, 88)
+shape = SubResource("CircleShape2D_a7j4q")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus2"]
+position = Vector2(217, 91)
+texture = ExtResource("6_ntjhr")
+
+[node name="Wall" parent="." instance=ExtResource("7_hdate")]
+position = Vector2(-17, -236)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall2" parent="." instance=ExtResource("7_hdate")]
+position = Vector2(332, 18)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall3" parent="." instance=ExtResource("7_hdate")]
+position = Vector2(453, 20)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall4" parent="." instance=ExtResource("7_hdate")]
+position = Vector2(-19, 28)
+mass = 0.001
+gravity_scale = 2.0
+
+[node name="Wall5" parent="." instance=ExtResource("7_hdate")]
+position = Vector2(-454, 157)
+mass = 1000.0
+gravity_scale = 0.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_pp43f")
+
+[node name="score" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Sound Effects" type="Node" parent="AudioStreamPlayer"]
+
+[node name="Crash" type="AudioStreamPlayer2D" parent="AudioStreamPlayer/Sound Effects"]
+stream = ExtResource("10_5ulk5")
+
+[node name="bgm" type="AudioStreamPlayer2D" parent="AudioStreamPlayer/Sound Effects"]
+stream = ExtResource("11_4v2at")
+autoplay = true
+
+[connection signal="child_entered_tree" from="StaticBody2D" to="StaticBody2D" method="_on_child_entered_tree"]
+[connection signal="body_entered" from="Sus" to="Sus" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus" to="Sus" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="Sus2" to="Sus2" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus2" to="Sus2" method="_on_body_shape_entered"]

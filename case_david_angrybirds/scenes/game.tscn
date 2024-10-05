@@ -131,7 +131,6 @@ stream = ExtResource("9_3m6tl")
 stream = ExtResource("10_espgc")
 autoplay = true
 
-[connection signal="body_entered" from="Fish" to="Fish" method="_on_body_entered"]
 [connection signal="body_shape_entered" from="Fish" to="Fish" method="_on_body_shape_entered"]
 [connection signal="child_entered_tree" from="StaticBody2D" to="StaticBody2D" method="_on_child_entered_tree"]
 [connection signal="body_entered" from="Sus" to="Sus" method="_on_body_entered"]

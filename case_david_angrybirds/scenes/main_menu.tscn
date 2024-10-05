@@ -45,18 +45,22 @@ text = "Choose A Level!"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 388.0
-offset_top = 528.0
-offset_right = 738.0
-offset_bottom = 551.0
-text = "Press Escape to quit or take you to the menu!"
+offset_left = 206.0
+offset_top = 587.0
+offset_right = 928.0
+offset_bottom = 636.0
+text = "Press Escape to quit or take you to the menu!
+Dev Note: The escape button works only on the first screen you start on but not the next one"
+horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 2
 offset_top = 506.0
 offset_right = 1127.0
 offset_bottom = 529.0
-text = "Killing all the fish will take you to the next level!"
+text = "Killing all the fish will take you to the next level!
+Press the SpaceBar to jump a randomized distance!
+Yes I still haven't figured out how to actually make a launcher that shoots you where you specified!"
 horizontal_alignment = 1
 
 [node name="Level1" type="Button" parent="."]
